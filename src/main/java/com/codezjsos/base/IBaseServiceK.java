@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import com.base.bean.PageBeanK;
+import com.codezjsos.base.bean.PageBeanK;
 
 public interface IBaseServiceK {
 	public <T> void save(T t) throws Exception;
