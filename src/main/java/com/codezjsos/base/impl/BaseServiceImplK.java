@@ -7,18 +7,19 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import com.codezjsos.base.IBaseDaoK;
+import com.codezjsos.base.IBaseServiceK;
+import com.codezjsos.base.bean.PageBeanK;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.base.IBaseDaoK;
-import com.base.IBaseServiceK;
-import com.base.bean.PageBeanK;
+
 
 @Transactional
 @Service
-public class BaseServiceImplK implements IBaseServiceK{
+public class BaseServiceImplK implements IBaseServiceK {
 	protected JdbcTemplate jdbcTemplate;
 	@Resource
 	private IBaseDaoK baseDaoK;

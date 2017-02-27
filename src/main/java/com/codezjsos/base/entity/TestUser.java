@@ -9,7 +9,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.base.IBaseServiceK;
 
 @Entity
 @Table(name="a_test_user")
