@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.codezjsos.base.bean.PageBeanK;
 
+import javax.sql.DataSource;
+
 public interface IBaseServiceK {
 	public <T> void save(T t) throws Exception;
 	public <T> void update(T t) throws Exception;
@@ -30,5 +32,8 @@ public interface IBaseServiceK {
 	public Long count(String hql, Map<String, Object> obj)throws Exception ;
 	
 	public void deleteListSql(String sql, Object... obj) throws Exception;
-	
+
+	public void setBaseDaoK(IBaseDaoK baseDaoK);
+	public void setJdbcTemplate(DataSource dataSource);
+
 }

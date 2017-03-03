@@ -19,7 +19,7 @@ import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
-@Repository
+
 public class BaseDaoImplK extends HibernateDaoSupport implements IBaseDaoK {
 	
 	private static final Logger logger=LoggerFactory.getLogger(BaseDaoImplK.class);
@@ -142,7 +142,7 @@ public class BaseDaoImplK extends HibernateDaoSupport implements IBaseDaoK {
 	}
 
 
-	@Resource
+
 	public void setSessionFactory2(SessionFactory sessionFactory){
 		setSessionFactory(sessionFactory);
 	}

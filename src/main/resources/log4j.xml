@@ -5,40 +5,110 @@
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="[%p] %d{yyyy-MM-dd HH:mm:ss:SSS} %l %m%n" />
 		</layout> <!--限制输出级别 -->
-		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+		<!--<filter class="org.apache.log4j.varia.LevelRangeFilter">
 			<param name="LevelMax" value="ERROR" />
 			<param name="LevelMin" value="DEBUG" />
-		</filter>
+		</filter>-->
 	</appender>
-	<appender name="FILE" class="org.apache.log4j.FileAppender">
+<!--	<appender name="FILE" class="org.apache.log4j.FileAppender">
 		<param name="File" value="c:/1.log"></param>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="[%p] %d{yyyy-MM-dd HH:mm:ss:SSS} %l %m%n" />
-		</layout> <!--限制输出级别 -->
+		</layout> &lt;!&ndash;限制输出级别 &ndash;&gt;
 		<filter class="org.apache.log4j.varia.LevelRangeFilter">
 			<param name="LevelMax" value="ERROR" />
 			<param name="LevelMin" value="DEBUG" />
 		</filter>
+	</appender>-->
+
+	<appender name="dailyRollingFile"
+			  class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="info"></param>
+		<param name="ImmediateFlush" value="true"></param>
+		<param name="File" value="outinfo.log"></param>
+		<param name="DatePattern" value="'.'yyyy-MM-dd"></param>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param>
+		</layout>
 	</appender>
+	<!--过滤不需要的包输出-->
 	<category name="org">
   		<priority value="error" />
-  	<appender-ref ref="CONSOLE" />
-  	<appender-ref ref="FILE" />
+  		<appender-ref ref="CONSOLE" />
  </category>
 	<category name="com.mchange">
   		<priority value="error" />
   	<appender-ref ref="CONSOLE" />
-  	<appender-ref ref="FILE" />
  </category>
 	<root>
 		<priority value="debug" />
 		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="FILE" />
+		<appender-ref ref="dailyRollingFile" />
+
 	</root>
 	
 </log4j:configuration>
 
-   <!-- 
+   <!--
+   配置根Logger
+   其语法为：
+    log4j.rootLogger = [ level ] , appenderName1, appenderName2, …
+level: 是日志记录的优先级，分为OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL或
+者您定义的级别。Log4j建议只使用四个级别，优 先级从高到低分别是ERROR、WARN、INFO、DEBUG。通过在这里定义的级别，您可以控制到应用程序中相应级别的日志信息的开关。比如在这里定 义了INFO级别，则应用程序中所有DEBUG级别的日志信息将不被打印出来。
+appenderName: 就是指定日志信息输出到哪个地方。您可以同时指定多个输出目的地。
+        例如：log4j.rootLogger＝info,A1,B2,C3
+
+输出级别的种类
+OFF 、FATAL 、ERROR、WARN、INFO、DEBUG、TRACE 、ALL
+ OFF 为最高等级 关闭了日志信息
+ FATAL  为可能导致应用中止的严重事件错误
+ ERROR 为严重错误 主要是程序的错误
+ WARN 为一般警告，比如session丢失
+ INFO 为一般要显示的信息，比如登录登出
+ DEBUG 为程序的调试信息
+ TRACE 为比DEBUG更细粒度的事件信息
+ ALL 为最低等级，将打开所有级别的日志
+
+ 配置日志信息输出目的地
+log4j.appender.appenderName = fully.qualified.name.of.appender.class
+ 1.org.apache.log4j.ConsoleAppender（控制台）
+ 2.org.apache.log4j.FileAppender（文件）
+ 3.org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件）
+ 4.org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件）
+ 5.org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方）
+
+
+ 配置日志信息的格式
+log4j.appender.appenderName.layout = fully.qualified.name.of.layout.class
+ 1.org.apache.log4j.HTMLLayout（以HTML表格形式布局），
+ 2.org.apache.log4j.PatternLayout（可以灵活地指定布局模式），
+ 3.org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串），
+ 4.org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等等信息）
+
+ <strong>ConsoleAppender</strong>
+Threshold=DEBUG:指定日志消息的输出最低层次。
+ ImmediateFlush=true:默认值是true,意谓着所有的消息都会被立即输出。
+ Target=System.err：默认情况下是：System.out,指定输出控制台
+
+ <strong>FileAppender 选项</strong>
+ Threshold=DEBUF:指定日志消息的输出最低层次。
+ ImmediateFlush=true:默认值是true,意谓着所有的消息都会被立即输出。
+ File=mylog.txt:指定消息输出到mylog.txt文件。
+ Append=false:默认值是true,即将消息增加到指定文件中，false指将消息覆盖指定的文件内容。
+
+ <strong>RollingFileAppender 选项</strong>
+ Threshold=DEBUG:指定日志消息的输出最低层次。
+ ImmediateFlush=true:默认值是true,意谓着所有的消息都会被立即输出。
+ File=mylog.txt:指定消息输出到mylog.txt文件。
+ Append=false:默认值是true,即将消息增加到指定文件中，false指将消息覆盖指定的文件内容。
+ MaxFileSize=100KB: 后缀可以是KB, MB 或者是 GB. 在日志文件到达该大小时，将会自动滚动，即将原来的内容移到mylog.log.1文件。
+ MaxBackupIndex=2:指定可以产生的滚动文件的最大数。
+ log4j.appender.A1.layout.ConversionPattern=%-4r %-5p %d{yyyy-MM-dd HH:mm:ssS} %c %m%n
+
+
+
+
+
     -X号: X信息输出时左对齐；
  %p: 输出日志信息优先级，即DEBUG，INFO，WARN，ERROR，FATAL,
  %d: 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d{yyy MMM dd HH:mm:ss,SSS}，输出类似：2002年10月18日 22：10：28，921
@@ -51,4 +121,82 @@
  %F: 输出日志消息产生时所在的文件名称
  %L: 输出代码中的行号
  %m: 输出代码中指定的消息,产生的日志具体信息
- %n: 输出一个回车换行符，Windows平台为"/r/n"，Unix平台为"/n"输出日志信息换行 -->
+ %n: 输出一个回车换行符，Windows平台为"/r/n"，Unix平台为"/n"输出日志信息换行
+
+
+
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+     输出日志到控制台  ConsoleAppender
+<appender name="console"
+		  class="org.apache.log4j.ConsoleAppender">
+<param name="Threshold" value="info"></param>
+<layout class="org.apache.log4j.TTCCLayout">
+	<param name="ConversionPattern" value="TTCCLayout"></param>
+</layout>
+</appender>
+
+		 输出日志到文件  每天一个文件
+<appender name="dailyRollingFile"
+		  class="org.apache.log4j.DailyRollingFileAppender">
+<param name="Threshold" value="info"></param>
+<param name="ImmediateFlush" value="true"></param>
+<param name="File" value="c:/logs/dailyRollingFile.log"></param>
+<param name="DatePattern" value="'.'yyyy-MM-dd'.log'"></param>
+<layout class="org.apache.log4j.PatternLayout">
+	<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param>
+</layout>
+</appender>
+
+		 输出日志到文件  文件大小到达指定尺寸的时候产生一个新的文件
+<appender name="railyFile"
+		  class="org.apache.log4j.RollingFileAppender">
+<param name="File" value="c:/logs/railyFile.log"></param>
+<param name="ImmediateFlush" value="true"/>
+<param name="Threshold" value="info"></param>
+<param name="Append" value="true"></param>
+<param name="MaxFileSize" value="30KB"></param>
+<param name="MaxBackupIndex" value="100"></param>
+<layout class="org.apache.log4j.PatternLayout">
+	<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param>
+</layout>
+</appender>
+
+		 输出日志到文件
+<appender name="file"
+		  class="org.apache.log4j.FileAppender">
+<param name="File" value="c:/logs/file.log"></param>
+<param name="Threshold" value="info"></param>
+<layout class="org.apache.log4j.PatternLayout">
+	<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param>
+</layout>
+</appender>
+
+
+            定义全局的日志输出级别,但是在输出目的地的配置中配置的具体输出级别优先级高于全局定义的优先级。
+            如果在railyFile中定义<param name="Threshold" value="info"></param>，那么将会把info以上级别的信息输出
+
+<root>
+<priority value="debug" />
+<appender-ref ref="console" />
+<appender-ref ref="dailyRollingFile" />
+<appender-ref ref="railyFile" />
+<appender-ref ref="file" />
+</root>
+
+		</log4j:configuration>
+
+
+
+
+<context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>/WEB-INF/log4j.xml</param-value>
+</context-param>
+<listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+</listener>
+
+
+ -->

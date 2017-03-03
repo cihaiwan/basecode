@@ -18,10 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Transactional
-@Service
+
 public class BaseServiceImplK implements IBaseServiceK {
 	protected JdbcTemplate jdbcTemplate;
-	@Resource
+
 	private IBaseDaoK baseDaoK;
 
 	public <T> void save(final T t) throws Exception {
@@ -145,7 +145,7 @@ public class BaseServiceImplK implements IBaseServiceK {
 		}
 	}
 	
-	@Resource(name="dataSource3")
+
 	public void setJdbcTemplate(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
@@ -154,4 +154,7 @@ public class BaseServiceImplK implements IBaseServiceK {
 		//(sql,obj)jdbcTemplate.execute(sql);
 	}
 
+	public void setBaseDaoK(IBaseDaoK baseDaoK) {
+		this.baseDaoK = baseDaoK;
+	}
 }

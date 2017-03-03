@@ -20,7 +20,7 @@ public class Test22Controller {
 	Gson gson=new GsonBuilder().create();
 
 	@Resource
-	private IBaseServiceK k;
+	private IBaseServiceK baseServiceK;
 	@RequestMapping("/test")
 	public void test() throws Exception{
 		logger.debug("hello world");
