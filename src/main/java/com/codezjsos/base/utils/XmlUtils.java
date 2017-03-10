@@ -90,6 +90,15 @@ public class XmlUtils {
         return obj;
     }
 
+    public static List<String> readTexts(String filename,String select) throws DocumentException {
+        List list = instance(filename).selectNodes(select);
+        List<String> list2=new ArrayList<String>();
+        for(Object obj:list){
+            Element e=(Element)obj;
+            list2.add(e.getTextTrim());
+        }
+        return list2;
+    }
     public static String  readText(String filename,String id) throws DocumentException {
         return getById(filename,id).getTextTrim();
     }

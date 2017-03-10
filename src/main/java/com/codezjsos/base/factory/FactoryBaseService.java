@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 /**
  * Created by zhufang on 2017/3/2.
  */
-@Component("baseServiceK" )
+@Component("baseService" )
 public class FactoryBaseService  extends FactoryBaseDataAccess{
     @Resource(name="dataSourceBase")
     public void setDataSource(DataSource dataSource) {

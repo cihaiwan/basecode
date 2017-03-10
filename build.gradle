@@ -1,5 +1,5 @@
 group 'codezjsos'
-version '1.0'
+version '1.0.4'
 
 apply plugin: 'groovy'
 apply plugin: 'java'

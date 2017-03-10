@@ -1,10 +1,10 @@
 package com.codezjsos.base.factory;
 
-import com.codezjsos.base.IBaseDaoK;
-import com.codezjsos.base.IBaseServiceK;
+import com.codezjsos.base.IBaseDao;
+import com.codezjsos.base.IBaseService;
 import com.codezjsos.base.entity.TestUser;
-import com.codezjsos.base.impl.BaseDaoImplK;
-import com.codezjsos.base.impl.BaseServiceImplK;
+import com.codezjsos.base.impl.BaseDaoImpl;
+import com.codezjsos.base.impl.BaseServiceImpl;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.ApplicationContext;
@@ -20,7 +20,7 @@ import java.util.List;
  * Created by zhufang on 2017/3/2.
  */
 
-public abstract  class FactoryBaseDataAccess implements FactoryBean<IBaseServiceK>{
+public abstract  class FactoryBaseDataAccess implements FactoryBean<IBaseService>{
     protected DataSource dataSource;
     protected SessionFactory sessionFactory;
 
@@ -28,20 +28,20 @@ public abstract  class FactoryBaseDataAccess implements FactoryBean<IBaseService
 
     public abstract  void setSessionFactory(SessionFactory sessionFactory);
 
-    private IBaseDaoK baseDaoK=new BaseDaoImplK();;
-    private IBaseServiceK baseServiceK=new BaseServiceImplK();
+    private IBaseDao baseDao=new BaseDaoImpl();;
+    private IBaseService baseService=new BaseServiceImpl();
 
     @Override
-    public IBaseServiceK getObject() throws Exception {
-        baseDaoK.setSessionFactory2(sessionFactory);
-        baseServiceK.setBaseDaoK(baseDaoK);
-        baseServiceK.setJdbcTemplate(dataSource);
-        return baseServiceK;
+    public IBaseService getObject() throws Exception {
+        baseDao.setSessionFactory2(sessionFactory);
+        baseService.setBaseDao(baseDao);
+        baseService.setJdbcTemplate(dataSource);
+        return baseService;
     }
 
     @Override
     public Class<?> getObjectType() {
-        return IBaseServiceK.class;
+        return IBaseService.class;
     }
 
     @Override
@@ -51,13 +51,13 @@ public abstract  class FactoryBaseDataAccess implements FactoryBean<IBaseService
 
     public static void main(String[] args) throws Exception {
 //        ApplicationContext ac=new ClassPathXmlApplicationContext("baseContext.xml");
-//        IBaseServiceK baseServiceK= (IBaseServiceK) ac.getBean("baseServiceK");
-//        baseServiceK.findAll("from TestUser");
-//        IBaseServiceK baseServiceK2= (IBaseServiceK) ac.getBean("baseServiceK");
-//        baseServiceK2.findAll("from TestUser");
+//        IBaseService baseService= (IBaseService) ac.getBean("baseService");
+//        baseService.findAll("from TestUser");
+//        IBaseService baseService2= (IBaseService) ac.getBean("baseService");
+//        baseService2.findAll("from TestUser");
         ApplicationContext ac=new ClassPathXmlApplicationContext("logContext.xml");
-        IBaseServiceK baseServiceK= (IBaseServiceK) ac.getBean("baseServiceKLog");
-        List<Object> obj= baseServiceK.findAll("from TrackLogEntity");
+        IBaseService baseService= (IBaseService) ac.getBean("baseServiceLog");
+        List<Object> obj= baseService.findAll("from TrackLogEntity");
         System.out.println(obj.size());
     }
 }

@@ -22,12 +22,11 @@
 </bean>
 <tx:annotation-driven transaction-manager="transactionManagerBase" proxy-target-class="true"/>
 
-<util:list id="entities">
+<!--<util:list id="entities">
 	<value>com.codezjsos.base.entity</value>
+</util:list>-->
 
-</util:list>
-
-<context:property-placeholder location="classpath:jdbc.properties"  />
+<context:property-placeholder location="classpath:jdbc.properties,classpath:baseConfig.properties"  />
 	<bean id="dataSourceBase" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="${jdbc.driverClass}" />
 		<property name="jdbcUrl" value="${jdbc.jdbcUrl}" />
@@ -73,12 +72,14 @@
 	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
 
 	<!-- springMvc文件上传的支持 -->
-	<!--	<bean id="multipartResolverBase"
+		<bean id="multipartResolverBase"
             class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
             <property name="maxUploadSize" value="1024000000" />
             <property name="resolveLazily" value="true" />
             <property name="maxInMemorySize" value="4096" />
         </bean>
-	<mvc:annotation-driven />-->
-
+	<mvc:annotation-driven />
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="${prefix}" suffix="${suffix}"/>
+	</mvc:view-resolvers>
 	</beans> 

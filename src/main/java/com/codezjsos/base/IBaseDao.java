@@ -6,7 +6,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public interface IBaseDaoK {
+public interface IBaseDao {
 	
 	public <T> void save(T t) throws Exception;
 	public <T> void update(T t) throws Exception;

@@ -23,10 +23,10 @@
 <!--
 
 -->
-	<util:list id="logentities">
+<!--	<util:list id="logentities">
 		<value>com.codezjsos.log.entity</value>
 
-	</util:list>
+	</util:list>-->
 <!-- springMvc文件上传的支持 -->
 <!--	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -71,7 +71,7 @@
 			</props>
 		</property>
 
-		<property name="packagesToScan" ref="logentities">
+		<property name="packagesToScan" ref="logentities" >
 
 		</property>
 

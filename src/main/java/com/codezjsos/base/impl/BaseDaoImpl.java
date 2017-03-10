@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import com.codezjsos.base.IBaseDaoK;
+import com.codezjsos.base.IBaseDao;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -20,9 +20,9 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 
-public class BaseDaoImplK extends HibernateDaoSupport implements IBaseDaoK {
+public class BaseDaoImpl extends HibernateDaoSupport implements IBaseDao {
 	
-	private static final Logger logger=LoggerFactory.getLogger(BaseDaoImplK.class);
+	private static final Logger logger=LoggerFactory.getLogger(BaseDaoImpl.class);
 	
 	public <T> void save(T t) throws Exception {
 		getHibernateTemplate().save(t);

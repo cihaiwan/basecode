@@ -2,7 +2,7 @@ package com.codezjsos.base.controller;
 
 import javax.annotation.Resource;
 
-import com.codezjsos.base.IBaseServiceK;
+import com.codezjsos.base.IBaseService;
 import com.codezjsos.base.utils.XmlUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ public class Test22Controller {
 	Gson gson=new GsonBuilder().create();
 
 	@Resource
-	private IBaseServiceK baseServiceK;
+	private IBaseService baseService;
 	@RequestMapping("/test")
 	public void test() throws Exception{
 		logger.debug("hello world");
@@ -34,17 +34,17 @@ public class Test22Controller {
 //		map33.put("name","2");
 //		List<TestUser> users33=k.findAll("from TestUser where name=:name",map33);
 //		System.out.println(gson.toJson(users33));
-//		List<TestUser> users2=k.findPage("from TestUser where unid=?",new PageBeanK(),"1");
+//		List<TestUser> users2=k.findPage("from TestUser where unid=?",new PageBean(),"1");
 //		System.out.println(gson.toJson(users2));
 //		Map<String,Object> map=new HashMap<String,Object>();
 //		map.put("name","2");
-//		List<TestUser> users3=k.findPage("from TestUser where name=:name",new PageBeanK(),map);
+//		List<TestUser> users3=k.findPage("from TestUser where name=:name",new PageBean(),map);
 //		System.out.println("-------------->"+gson.toJson(users3));
 //		TestUser user2=k.findSql(TestUser.class, "select * from a_test_user  where unid=?","1");
 //		System.out.println("user2------->"+gson.toJson(user2));
 //		List<TestUser> user21=k.findAllSql(TestUser.class, "select * from a_test_user a where a.unid=?","1");
 //		System.out.println("user21------->"+gson.toJson(user21));
-//		List<TestUser> user22=k.findSqlPage(TestUser.class, "select * from a_test_user a where a.unid=?",new PageBeanK(),"1");
+//		List<TestUser> user22=k.findSqlPage(TestUser.class, "select * from a_test_user a where a.unid=?",new PageBean(),"1");
 //		System.out.println("user22------->"+gson.toJson(user22));
 	}
 }

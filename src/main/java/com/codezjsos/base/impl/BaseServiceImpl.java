@@ -7,9 +7,9 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import com.codezjsos.base.IBaseDaoK;
-import com.codezjsos.base.IBaseServiceK;
-import com.codezjsos.base.bean.PageBeanK;
+import com.codezjsos.base.IBaseDao;
+import com.codezjsos.base.IBaseService;
+import com.codezjsos.base.bean.PageBean;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -18,71 +18,70 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Transactional
-
-public class BaseServiceImplK implements IBaseServiceK {
+public class BaseServiceImpl implements IBaseService {
 	protected JdbcTemplate jdbcTemplate;
 
-	private IBaseDaoK baseDaoK;
+	private IBaseDao baseDao;
 
 	public <T> void save(final T t) throws Exception {
-		baseDaoK.save(t);
+		baseDao.save(t);
 		
 	}
 
 	public <T> void update(T t) throws Exception {
-		baseDaoK.update(t);
+		baseDao.update(t);
 	}
 
 	public <T> void delete(T t) throws Exception {
-		baseDaoK.delete(t);
+		baseDao.delete(t);
 	}
 
 	public <T> T findOne(Class<T> clz, Serializable unid) throws Exception {
 		// TODO Auto-generated method stub
-		return baseDaoK.findOne(clz, unid);
+		return baseDao.findOne(clz, unid);
 	}
 
 	public <T> T load(Class<T> clz, Serializable unid) throws Exception {
 		// TODO Auto-generated method stub
-		return baseDaoK.load(clz, unid);
+		return baseDao.load(clz, unid);
 	}
 
 	public <T> T findOne(String hql, Object... obj) throws Exception {
 		
-		return baseDaoK.findOne(hql, obj);
+		return baseDao.findOne(hql, obj);
 	}
 
 	public <T> T findOne(String hql, Map<String, Object> obj) throws Exception {
 		// TODO Auto-generated method stub
-		return baseDaoK.findOne(hql, obj);
+		return baseDao.findOne(hql, obj);
 	}
 
 	public <T> List<T> findAll(String hql, Object... obj) throws Exception {
 		// TODO Auto-generated method stub
-		return baseDaoK.findAll(hql, obj);
+		return baseDao.findAll(hql, obj);
 	}
 
 	public <T> List<T> findAll(String hql, Map<String, Object> obj)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return baseDaoK.findAll(hql, obj);
+		return baseDao.findAll(hql, obj);
 	}
 
 	
-	public <T> List<T> findPage(String hql, PageBeanK bean, Object... obj)
+	public <T> List<T> findPage(String hql, PageBean bean, Object... obj)
 			throws Exception {
 		Long count=count(hql, obj);
 		bean.setAllCount(count.intValue());
-		List<T> data=baseDaoK.findPage(hql, bean.getPageNo(),bean.getPageSize(),obj);
+		List<T> data=baseDao.findPage(hql, bean.getPageNo(),bean.getPageSize(),obj);
 		bean.setData(data);
 		return data;
 	}
 
-	public <T> List<T> findPage(String hql, PageBeanK bean,
+	public <T> List<T> findPage(String hql, PageBean bean,
 			Map<String, Object> obj) throws Exception {
 		Long count=count(hql, obj);
 		bean.setAllCount(count.intValue());
-		List<T> data=baseDaoK.findPage(hql, bean.getPageNo(),bean.getPageSize(),obj);
+		List<T> data=baseDao.findPage(hql, bean.getPageNo(),bean.getPageSize(),obj);
 		bean.setData(data);
 		return data;
 	}
@@ -90,41 +89,41 @@ public class BaseServiceImplK implements IBaseServiceK {
 	public <T> T findSql(Class<T> clz, String sql, Object... obj)
 			throws Exception {
 		
-		return baseDaoK.findSql(clz, sql, obj);
+		return baseDao.findSql(clz, sql, obj);
 	}
 
 	public <T> T findSql(Class<T> clz, String sql, Map<String, Object> obj)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return baseDaoK.findSql(clz, sql, obj);
+		return baseDao.findSql(clz, sql, obj);
 	}
 
 	public <T> List<T> findAllSql(Class<T> clz, String sql, Object... obj)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return baseDaoK.findAllSql(clz, sql, obj);
+		return baseDao.findAllSql(clz, sql, obj);
 	}
 
 	public <T> List<T> findAllSql(Class<T> clz, String sql,
 			Map<String, Object> obj) throws Exception {
 		// TODO Auto-generated method stub
-		return baseDaoK.findAllSql(clz, sql, obj);
+		return baseDao.findAllSql(clz, sql, obj);
 	}
 
-	public <T> List<T> findSqlPage(Class<T> clz, String sql, PageBeanK bean,
+	public <T> List<T> findSqlPage(Class<T> clz, String sql, PageBean bean,
 			Object... obj) throws Exception {
-		Number count=baseDaoK.findSqlNum("select count(*) from "+ StringUtils.substringAfter(sql , "from"), obj);
+		Number count=baseDao.findSqlNum("select count(*) from "+ StringUtils.substringAfter(sql , "from"), obj);
 		bean.setAllCount(count.intValue());
-		List<T> data=baseDaoK.findSqlPage(clz,sql, bean.getPageNo(),bean.getPageSize(),obj);
+		List<T> data=baseDao.findSqlPage(clz,sql, bean.getPageNo(),bean.getPageSize(),obj);
 		bean.setData(data);
 		return data;
 	}
 
-	public <T> List<T> findSqlPage(Class<T> clz, String sql, PageBeanK bean,
+	public <T> List<T> findSqlPage(Class<T> clz, String sql, PageBean bean,
 			Map<String, Object> obj) throws Exception {
-		Number count=baseDaoK.findSqlNum("select count(*) from "+ StringUtils.substringAfter(sql , "from"), obj);
+		Number count=baseDao.findSqlNum("select count(*) from "+ StringUtils.substringAfter(sql , "from"), obj);
 		bean.setAllCount(count.intValue());
-		List<T> data=baseDaoK.findSqlPage(clz,sql, bean.getPageNo(),bean.getPageSize(),obj);
+		List<T> data=baseDao.findSqlPage(clz,sql, bean.getPageNo(),bean.getPageSize(),obj);
 		bean.setData(data);
 		return data;
 	}
@@ -154,7 +153,7 @@ public class BaseServiceImplK implements IBaseServiceK {
 		//(sql,obj)jdbcTemplate.execute(sql);
 	}
 
-	public void setBaseDaoK(IBaseDaoK baseDaoK) {
-		this.baseDaoK = baseDaoK;
+	public void setBaseDao(IBaseDao baseDao) {
+		this.baseDao = baseDao;
 	}
 }

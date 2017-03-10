@@ -3,7 +3,7 @@ package com.codezjsos.base.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PageBeanK {
+public class PageBean {
 private Integer page = 0;
 	
 	private Integer rows = 10;

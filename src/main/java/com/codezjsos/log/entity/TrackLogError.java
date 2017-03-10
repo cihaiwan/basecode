@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="tracklog_error")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class TrackLogError {
+public class TrackLogError extends TrackBase{
 
 	private String unid;
 	private Date createtime;

@@ -1,0 +1,32 @@
+可以使用slf4j
+
+
+分页的bean PageBean
+查询数据库IBaseService
+
+
+util
+JsonUtils
+MessageFactory          产生map
+PlaceholderParseUtils  占位符替换
+ScriptUtils
+XmlUtils
+
+多数据实现代码方式
+{
+@Component("baseServiceKLog")
+public class FactoryLogService extends FactoryBaseDataAccess{
+    @Resource(name="dataSourceLog")
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource=dataSource;
+    }
+
+    @Resource(name="sessionFactoryLog")
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory=sessionFactory;
+    }
+}
+
+配置看logContext.xml
+
+}

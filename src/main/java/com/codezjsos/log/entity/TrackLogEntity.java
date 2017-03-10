@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="tracklog_entity")
-public class TrackLogEntity {
+public class TrackLogEntity extends TrackBase{
 
 	private String unid;
 	private Date createtime;
